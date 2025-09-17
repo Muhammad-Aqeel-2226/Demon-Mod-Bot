@@ -1,6 +1,7 @@
 const { Client, Message, EmbedBuilder } = require("discord.js");
 const Level = require("../../models/Level");
 const calculateLevelXp = require("../../utils/calculateLevelXp");
+const cooldowns = new Set();
 
 const getRandomXp = (min, max) => {
   min = Math.ceil(min);
@@ -15,9 +16,14 @@ const getRandomXp = (min, max) => {
  */
 
 module.exports = async (client, message) => {
-  if (!message.inGuild() || message.author.bot) return;
+  if (
+    !message.inGuild() ||
+    message.author.bot ||
+    cooldowns.has(message.author.id)
+  )
+    return;
 
-  const xpToGive = getRandomXp(5, 10);
+  const xpToGive = getRandomXp(5, 15);
 
   const query = {
     userId: message.author.id,
@@ -49,6 +55,11 @@ module.exports = async (client, message) => {
         console.log(`Error while Updating XP: ${error}`);
         return;
       });
+
+      cooldowns.add(message.author.id);
+      setTimeout(() => {
+        cooldowns.delete(message.author.id);
+      }, 30000);
     } else {
       // if level doesn't exist
       // create new level
@@ -60,6 +71,10 @@ module.exports = async (client, message) => {
       });
 
       await newLevel.save();
+      cooldowns.add(message.author.id);
+      setTimeout(() => {
+        cooldowns.delete(message.author.id);
+      }, 30000);
     }
   } catch (error) {
     console.log(`Error while giving XP: ${error}`);

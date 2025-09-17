@@ -27,7 +27,11 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Kick Failed")
         .setDescription("User does not exist in this server.")
-        .setTimestamp();
+        .setTimestamp()
+        .setFooter({
+          text: `Kick requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
 
       await interaction.editReply({ embeds: [errorEmbed] });
       return;
@@ -38,9 +42,13 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Kick Failed")
         .setDescription(
-          "You can't kick The Demon Lord. He is the Owner of the server."
+          `You can't kick ${targetUser} The Demon Lord. He is the Owner of the server.`
         )
-        .setTimestamp();
+        .setTimestamp()
+        .setFooter({
+          text: `Kick requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
 
       await interaction.editReply({ embeds: [errorEmbed] });
       return;
@@ -55,9 +63,13 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Kick Failed")
         .setDescription(
-          "You can't kick that User because they have the Same/Higher Role than you."
+          `You can't kick ${targetUser} because they have the Same/Higher Role than you.`
         )
-        .setTimestamp();
+        .setTimestamp()
+        .setFooter({
+          text: `Kick requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
 
       await interaction.editReply({ embeds: [errorEmbed] });
       return;
@@ -68,9 +80,13 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Kick Failed")
         .setDescription(
-          "You can't kick that User because they have the Same/Higher Role as me."
+          `You can't kick ${targetUser} because they have the Same/Higher Role as me.`
         )
-        .setTimestamp();
+        .setTimestamp()
+        .setFooter({
+          text: `Kick requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
 
       await interaction.editReply({ embeds: [errorEmbed] });
       return;
@@ -83,7 +99,7 @@ module.exports = {
 
       const successEmbed = new EmbedBuilder()
         .setColor(0x57f287) // green
-        .setTitle("✅ User Kicked")
+        .setTitle(`✅ User ${targetUser} is Kicked`)
         .addFields(
           { name: "User", value: `${targetUser}`, inline: true },
           { name: "Reason", value: reason, inline: true }
@@ -103,9 +119,13 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Kick Failed")
         .setDescription(
-          "I couldn't kick that user. I don't have the necessary permissions.\n Please check my role and permission settings."
+          `I couldn't ${targetUser}. I don't have the necessary permissions.\n Please check my role and permission settings.`
         )
-        .setTimestamp();
+        .setTimestamp()
+        .setFooter({
+          text: `Kick requested by ${interaction.user.tag}`,
+          iconURL: interaction.user.displayAvatarURL(),
+        });
 
       await interaction.editReply({ embeds: [errorEmbed] });
     }

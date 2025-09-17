@@ -44,7 +44,7 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Timeout Failed")
         .setDescription(
-          "You can't timeout The Demon Lord. He is the Owner of the server."
+          `You can't timeout ${targetUser} The Demon Lord. He is the Owner of the server.`
         )
         .setTimestamp()
         .setFooter({
@@ -61,7 +61,7 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Timeout Failed")
         .setDescription(
-          "I can't timeout the bot. Because there is no reason to timeout a bot."
+          "I can't timeout a bot. Because there is no reason to timeout a bot."
         )
         .setTimestamp()
         .setFooter({
@@ -155,7 +155,7 @@ module.exports = {
         await targetUser.timeout(msDuration, reason);
         const successEmbed = new EmbedBuilder()
           .setColor(0x57f287) // green
-          .setTitle("✅ User Timeout Updated")
+          .setTitle(`✅ User ${targetUser}'s timeout Updated`)
           .setDescription(
             `${targetUser}'s timeout has been updated to ${prettyMs(
               msDuration,
@@ -181,7 +181,7 @@ module.exports = {
 
       const successEmbed = new EmbedBuilder()
         .setColor(0x57f287) // green
-        .setTitle("✅ User Timed out")
+        .setTitle(`✅ User ${targetUser} is timed out`)
         .setDescription(
           `${targetUser}'s timed out for ${prettyMs(msDuration, {
             verbose: true,
@@ -207,7 +207,7 @@ module.exports = {
         .setColor(0xed4245) // red
         .setTitle("❌ Timeout Failed")
         .setDescription(
-          "I couldn't Timeout that user. I don't have the necessary permissions.\n Please check my role and permission settings."
+          `I couldn't Timeout ${targetUser}. I don't have the necessary permissions.\n Please check my role and permission settings.`
         )
         .setTimestamp()
         .setFooter({
